@@ -1,4 +1,4 @@
-package com.example.Location.Intelligence.config;
+package com.example.Location.Intelligence.config.producerconfig;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -14,11 +14,13 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
-    @Value("${spring.kafka.bootstrap-servers")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
 
     @Bean
+
+    // can be used for any type of json object with <string,object>
     public ProducerFactory<String,String> producerFactory(){
         Map<String,Object > configProps=new HashMap<>();
 
@@ -29,6 +31,7 @@ public class KafkaProducerConfig {
 
     }
     @Bean
+    //This should be <string,object> for custom json
     public KafkaTemplate <String,String> kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
 

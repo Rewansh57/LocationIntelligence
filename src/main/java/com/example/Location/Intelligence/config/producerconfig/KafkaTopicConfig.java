@@ -1,4 +1,4 @@
-package com.example.Location.Intelligence.config;
+package com.example.Location.Intelligence.config.producerconfig;
 
 
 

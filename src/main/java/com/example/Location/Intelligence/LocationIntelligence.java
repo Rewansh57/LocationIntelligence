@@ -11,6 +11,7 @@ public class LocationIntelligence implements CommandLineRunner {
 		SpringApplication.run(LocationIntelligence.class, args);
 
 
+
 	}
 	public void run (String... args) throws Exception {
 		System.out.println("LocationIntelligence");

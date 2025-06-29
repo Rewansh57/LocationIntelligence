@@ -1,6 +1,7 @@
 package com.example.Location.Intelligence;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,13 @@ public class MessageService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(String topicName,String message){
+    @Value("spring.kafka.topicName")
+
+    private String topicName;
+
+
+
+    public void sendMessage(String message){
         CompletableFuture<SendResult<String,String >> future=kafkaTemplate.send(topicName,message );
 
         //Provides us confirmation that the data was sent
