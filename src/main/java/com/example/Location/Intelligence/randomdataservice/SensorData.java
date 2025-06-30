@@ -1,18 +1,18 @@
 package com.example.Location.Intelligence.randomdataservice;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
+
 
 @Getter
 @Setter
 @ToString
-public class PM25 {
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class SensorData {
 
 
 
