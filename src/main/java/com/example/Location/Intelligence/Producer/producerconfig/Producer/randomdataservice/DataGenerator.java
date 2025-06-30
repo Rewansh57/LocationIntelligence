@@ -1,4 +1,4 @@
-package com.example.Location.Intelligence.randomdataservice;
+package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
 
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,5 @@
-package com.example.Location.Intelligence.producerconfig;
+package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
 
-import com.example.Location.Intelligence.randomdataservice.DataGenerator;
-import com.example.Location.Intelligence.randomdataservice.SensorData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;

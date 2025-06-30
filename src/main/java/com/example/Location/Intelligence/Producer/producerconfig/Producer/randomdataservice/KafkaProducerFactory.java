@@ -1,7 +1,6 @@
-package com.example.Location.Intelligence.producerconfig;
+package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
 
 
-import com.example.Location.Intelligence.randomdataservice.SensorData;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

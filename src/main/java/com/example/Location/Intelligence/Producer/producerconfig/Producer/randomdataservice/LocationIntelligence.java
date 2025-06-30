@@ -1,4 +1,4 @@
-package com.example.Location.Intelligence;
+package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

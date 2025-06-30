@@ -2,7 +2,7 @@ spring:
 
   kafka:
     topics:
-      pm25: test
+      pm25: pm-25
 
 
 
