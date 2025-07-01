@@ -1,28 +1,15 @@
 spring:
-
   kafka:
+    bootstrap-servers: 172.17.0.1:9092
     topics:
       pm25: pm-25
-    consumers:
-      groupid: air-quality-consumer-test3
+    consumer:
 
-
-
-      consumer:
-        auto-offset-reset: latest
-
-
-
-
-
-    bootstrap-servers: 172.17.0.1:9092
+      auto-offset-reset: latest
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
-
-
-server:
-  port: 9090
-
-
+    consumers :
+      group-id: air-quality-consumer-test4
+server :
+  port : 9090

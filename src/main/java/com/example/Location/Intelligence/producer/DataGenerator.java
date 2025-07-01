@@ -15,6 +15,8 @@ public class DataGenerator {
         JsonValue jsonValue = new JsonValue();
         int index= ThreadLocalRandom.current().nextInt(0, 20);
         float value = ThreadLocalRandom.current().nextFloat() * 250;
+        pm25.setSensorType("PM25");
+        pm25.setUnit("µg/m³");
         pm25.setValue(value);
         pm25.setLocationInfo(jsonValue.getSamples().get(index));
 

@@ -22,7 +22,7 @@ public class KafkaProducer {
     private final DataGenerator dataGenerator;
 
 
-    @Scheduled(fixedRate=5000)
+    @Scheduled(initialDelay = 5000,fixedRate=5000)
     public void sendPM25Data() throws JsonProcessingException {
         SensorData sensorData =dataGenerator.getPM25();
 
