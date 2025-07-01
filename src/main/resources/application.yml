@@ -1,15 +1,30 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: rootrewansh
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        ddl-auto: update
+        generate_statistics: true
+        default_schema: public
+
   kafka:
-    bootstrap-servers: 172.17.0.1:9092
+    bootstrap-servers: localhost:9092
     topics:
       pm25: pm-25
     consumer:
-
       auto-offset-reset: latest
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumers :
+    consumers:
       group-id: air-quality-consumer-test4
 server :
   port : 9090
