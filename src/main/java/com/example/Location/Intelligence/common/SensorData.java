@@ -1,4 +1,4 @@
-package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
+package com.example.Location.Intelligence.common;
 
 import lombok.*;
 

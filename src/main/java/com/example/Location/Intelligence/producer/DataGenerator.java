@@ -1,5 +1,7 @@
-package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
+package com.example.Location.Intelligence.producer;
 
+import com.example.Location.Intelligence.common.JsonValue;
+import com.example.Location.Intelligence.common.SensorData;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataGenerator {
 
 
-    public  SensorData getPM25(){
+    public SensorData getPM25(){
         SensorData pm25 = new SensorData();
         JsonValue jsonValue = new JsonValue();
         int index= ThreadLocalRandom.current().nextInt(0, 20);

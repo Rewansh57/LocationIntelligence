@@ -1,6 +1,7 @@
-package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
+package com.example.Location.Intelligence.producer;
 
 
+import com.example.Location.Intelligence.common.SensorData;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ public class KafkaProducerFactory {
     private String localServer;
 
    @Bean
-    public ProducerFactory<String,SensorData> createProducerFactory() {
+    public ProducerFactory<String, SensorData> createProducerFactory() {
         Map<String, Object> config=new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,localServer);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

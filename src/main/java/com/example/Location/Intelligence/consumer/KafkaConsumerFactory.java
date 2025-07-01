@@ -1,6 +1,6 @@
-package consumer;
+package com.example.Location.Intelligence.consumer;
 
-import com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice.SensorData;
+import com.example.Location.Intelligence.common.SensorData;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -19,33 +19,33 @@ public class KafkaConsumerFactory {
     @Value("${spring.kafka.bootstrap-servers}")
     private String kafkaServer;
 
-    @Value("${spring.kafka.consumer.groupid}")
+    @Value("${spring.kafka.consumers.groupid}")
     private String groupId;
 
 
+    @Bean
+    public ConsumerFactory<String, SensorData> createConsumer() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        // Don't use VALUE_DESERIALIZER_CLASS_CONFIG here for JsonDeserializer
 
-   @Bean
-    public ConsumerFactory<String,SensorData> createConsumer(){
+        JsonDeserializer<SensorData> deserializer = new JsonDeserializer<>(SensorData.class);
+        deserializer.addTrustedPackages("com.example.Location.Intelligence.common");
+        deserializer.setRemoveTypeHeaders(false);
+        deserializer.setUseTypeMapperForKey(false);
+        deserializer.setUseTypeHeaders(false);
 
-        JsonDeserializer<SensorData> deserializer=new JsonDeserializer<SensorData>(SensorData.class);
-       deserializer.setRemoveTypeHeaders(false);
-       deserializer.addTrustedPackages("*");
-       deserializer.setUseTypeHeaders(false);
-
-
-        Map<String,Object> config=new HashMap<>();
-
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServer);
-        config.put(ConsumerConfig.GROUP_ID_CONFIG,groupId);
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,deserializer.getClass());
-
-
-
-return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(),deserializer);
-
-
+        return new DefaultKafkaConsumerFactory<>(
+                configProps,
+                new StringDeserializer(),
+                deserializer
+        );
     }
+
+
+
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String,SensorData>  createKafkaListenerContainerFactory(){

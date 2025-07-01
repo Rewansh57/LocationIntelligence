@@ -1,6 +1,6 @@
-package consumer;
+package com.example.Location.Intelligence.consumer;
 
-import com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice.SensorData;
+import com.example.Location.Intelligence.common.SensorData;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.kafka.annotation.KafkaListener;
@@ -12,7 +12,11 @@ public class ConsumerListener {
 
     @KafkaListener(topics = "${spring.kafka.topics.pm25}", groupId = "${spring.kafka.consumers.groupid}")
     public void getData(SensorData sensorData) {
-        System.out.println("Received Sensor Data: " + sensorData);
+        try {
+            System.out.println("Received Sensor Data: " + sensorData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

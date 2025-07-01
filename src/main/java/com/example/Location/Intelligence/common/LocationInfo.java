@@ -1,12 +1,13 @@
-package com.example.Location.Intelligence.Producer.producerconfig.Producer.randomdataservice;
+package com.example.Location.Intelligence.common;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+
+
 public  class LocationInfo {
     public String name;
     public String category;
