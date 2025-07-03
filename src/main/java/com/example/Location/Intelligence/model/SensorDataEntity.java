@@ -5,6 +5,7 @@ import com.example.Location.Intelligence.common.SensorData;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDateTime;
 
@@ -46,6 +47,9 @@ public class SensorDataEntity {
 
 
     }
+     @Column(name="location",columnDefinition="geometry(Point,432)")
+    private Point location;
+
 
 
 }
