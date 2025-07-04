@@ -30,14 +30,18 @@ public interface SensorDataEntityRepository extends JpaRepository<SensorDataEnti
         time_stamp,
         name,
         category,
-        location
+        ST_AsGeoJSON(location) AS locationGeoJson
     FROM sensor_data_entity
     WHERE ST_DWithin(
         location::geography,
         ST_SetSRID(ST_MakePoint(:long, :lat), 4326)::geography,
+            
         5000
     )
     """, nativeQuery = true)
+
+    //Scans all the enteries at the range of 5 kms from a point
+
     List<Object[]> getAllSensorsWithinDist(
             @Param("long") double longitude,
             @Param("lat") double latitude
@@ -63,6 +67,30 @@ public interface SensorDataEntityRepository extends JpaRepository<SensorDataEnti
     LIMIT 10
     """, nativeQuery = true)
     List<Object[]> getNearbySensorsRaw(@Param("long") double longitude, @Param("lat") double latitude);
+
+
+
+    @Query(value = """
+    SELECT 
+        sensor_type,
+        value,
+        unit,
+        time_stamp,
+        name,
+        category,
+        ST_AsGeoJSON(location) AS locationGeoJson
+    FROM sensor_data_entity
+    WHERE location && ST_MakeEnvelope(:minlong, :minlat, :maxlong, :maxlat, 4326)
+    """, nativeQuery = true)
+
+    //Scans for all enteries nearby in a defined subspace
+
+    List<QueryResponseDto> getNearbySubspace(
+            @Param("minlong") double minLong,
+            @Param("minlat") double minLat,
+            @Param("maxlong") double maxLong,
+            @Param("maxlat") double maxLat
+    );
 
 }
 

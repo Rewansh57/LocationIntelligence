@@ -21,16 +21,18 @@ public class ConsumerListener {
 
 
     @KafkaListener(topics = "${spring.kafka.topics.pm25}", groupId = "${spring.kafka.consumers.groupid}")
-    public void getData(SensorData sensorData) {
+    public SensorDataEntity getData(SensorData sensorData) {
         SensorDataEntity sensorDataEntity =new SensorDataEntity(sensorData);
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
         Point point =geometryFactory.createPoint(new Coordinate(sensorData.getLocationInfo().getLongitude(),sensorData.getLocationInfo().getLatitude()));
         sensorDataEntity.setLocation(point);
         sensorDataEntityRepository.save(sensorDataEntity);
+        return sensorDataEntity;
 
 
 
-        System.out.println("DataSaved");
+
+
 
 
 

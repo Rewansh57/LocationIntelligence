@@ -1,6 +1,8 @@
 package com.example.Location.Intelligence.dto;
 
+import com.example.Location.Intelligence.model.SensorDataEntity;
 import lombok.*;
+import org.apache.kafka.common.metrics.Sensor;
 
 
 @Getter
@@ -19,6 +21,15 @@ public class QueryResponseDto {
     private String category;
     private String locationGeoJson;
     private double distance;
+    public QueryResponseDto(SensorDataEntity sensorDataEntity) {
+        this.sensorType = sensorDataEntity.getSensorType();
+        this.value = sensorDataEntity.getValue();
+        this.unit = sensorDataEntity.getUnit();
+        this.timeStamp = sensorDataEntity.getTimeStamp();
+        this.category=sensorDataEntity.getLocationInfo().getCategory();
+        this.name=sensorDataEntity.getLocationInfo().getName();
+        this.locationGeoJson=sensorDataEntity.getLocation()
+    }
 
     public QueryResponseDto(String sensorType, double value, String unit, String timeStamp, String name, String category, String locationGeoJson, double distance) {
         this.sensorType = sensorType;
