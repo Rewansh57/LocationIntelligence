@@ -92,6 +92,24 @@ public interface SensorDataEntityRepository extends JpaRepository<SensorDataEnti
             @Param("maxlat") double maxLat
     );
 
+
+@Query(value= """
+select sensor_type,
+        value,
+        unit,
+        time_stamp,
+        name,
+        category,
+        ST_AsGeoJSON(location) AS locationGeoJson
+     
+        FROM sensor_data_entity
+        WHERE sensor_type = :type
+        AND name = :locName
+        AND time_stamp >= :currTime
+    """,nativeQuery = true)
+List <QueryResponseDto> getLiveSensorData(@Param("type") String type,@Param("name") String locName,@Param("currTime") LocalDateTime currTime);
+
+
 }
 
 

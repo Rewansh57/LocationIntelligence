@@ -12,10 +12,6 @@ public class WebSocketSensorDataController {
     private final ConsumerListener consumerListener;
 
 
-    public QueryResponseDto getLiveData(){
-        consumerListener.
-
-    }
 
 
 }

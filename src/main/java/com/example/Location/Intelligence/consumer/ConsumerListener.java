@@ -4,6 +4,7 @@ package com.example.Location.Intelligence.consumer;
 import com.example.Location.Intelligence.common.SensorData;
 import com.example.Location.Intelligence.model.SensorDataEntity;
 import com.example.Location.Intelligence.repository.SensorDataEntityRepository;
+import com.example.Location.Intelligence.service.LiveDataFetchingFromKafka;
 import lombok.RequiredArgsConstructor;
 
 import org.locationtech.jts.geom.Coordinate;
@@ -18,16 +19,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ConsumerListener {
     private final SensorDataEntityRepository sensorDataEntityRepository;
+    private final LiveDataFetchingFromKafka  liveDataFetchingFromKafka;
 
 
     @KafkaListener(topics = "${spring.kafka.topics.pm25}", groupId = "${spring.kafka.consumers.groupid}")
-    public SensorDataEntity getData(SensorData sensorData) {
+    public void  getData(SensorData sensorData) {
         SensorDataEntity sensorDataEntity =new SensorDataEntity(sensorData);
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
         Point point =geometryFactory.createPoint(new Coordinate(sensorData.getLocationInfo().getLongitude(),sensorData.getLocationInfo().getLatitude()));
         sensorDataEntity.setLocation(point);
         sensorDataEntityRepository.save(sensorDataEntity);
-        return sensorDataEntity;
+
+
+
+
+
 
 
 

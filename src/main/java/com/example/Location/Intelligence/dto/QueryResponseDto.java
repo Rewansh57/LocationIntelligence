@@ -1,5 +1,6 @@
 package com.example.Location.Intelligence.dto;
 
+import com.example.Location.Intelligence.common.GeoJsonUtil;
 import com.example.Location.Intelligence.model.SensorDataEntity;
 import lombok.*;
 import org.apache.kafka.common.metrics.Sensor;
@@ -13,6 +14,7 @@ import org.apache.kafka.common.metrics.Sensor;
 
 
 public class QueryResponseDto {
+
     private String sensorType;
     private double value;
     private String unit;
@@ -28,7 +30,9 @@ public class QueryResponseDto {
         this.timeStamp = sensorDataEntity.getTimeStamp();
         this.category=sensorDataEntity.getLocationInfo().getCategory();
         this.name=sensorDataEntity.getLocationInfo().getName();
-        this.locationGeoJson=sensorDataEntity.getLocation()
+        this.locationGeoJson= GeoJsonUtil.toGeoJson(sensorDataEntity.getLocation());
+
+
     }
 
     public QueryResponseDto(String sensorType, double value, String unit, String timeStamp, String name, String category, String locationGeoJson, double distance) {
